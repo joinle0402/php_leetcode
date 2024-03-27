@@ -1,0 +1,57 @@
+<?php
+require_once __DIR__ . "/vendor/autoload.php";
+
+function makeByTemplate(string $filePath, string $templateName, array $data = []): void
+{
+    $fileContent = file_get_contents(__DIR__."/templates/$templateName.txt");
+    foreach ($data as $key => $value)
+        $fileContent = str_replace($key, $value, $fileContent);
+    if (!file_exists($filePath)) {
+        file_put_contents($filePath, $fileContent);
+        echo "$filePath created".PHP_EOL;
+    } else {
+        echo "$filePath is exists!!".PHP_EOL;
+    }
+}
+
+
+if ($_SERVER['argv'][1] == 'make:solution')
+{
+    $solution = $_SERVER['argv'][2];
+    makeByTemplate("src/Solution$solution.php", "SolutionTemplate", ["{SolutionName}" => "Solution$solution"]);
+    makeByTemplate("tests/Solution{$solution}Test.php", "SolutionTestTemplate", ["{SolutionName}" => "Solution{$solution}"]);
+}
+
+//if ($_SERVER['argv'][1] === 'make:controller')
+//{
+//    $componentName = $_SERVER['argv'][2];
+//    $componentPath = "controllers/$componentName.php";
+//    $componentContent = file_get_contents(__DIR__."/templates/ControllerTemplate.txt");
+//    $componentContent = str_replace('$componentName', $componentName, $componentContent);
+//
+//    if (!file_exists($componentPath))
+//    {
+//        file_put_contents($componentPath, $componentContent);
+//        echo "$componentPath created";
+//    }
+//    else
+//    {
+//        echo "$componentPath is exists!!";
+//    }
+//}
+//
+//if ($_SERVER['argv'][1] === 'drop:controller')
+//{
+//    $componentName = $_SERVER['argv'][2];
+//    $componentPath = "controllers/$componentName.php";
+//
+//    if (file_exists($componentPath))
+//    {
+//        unlink($componentPath);
+//        echo "$componentPath deleted";
+//    }
+//    else
+//    {
+//        echo "$componentPath is not exists!!";
+//    }
+//}

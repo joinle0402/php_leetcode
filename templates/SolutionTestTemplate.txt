@@ -1,0 +1,18 @@
+<?php
+namespace Solution\Leetcode\Tests;
+
+use PHPUnit\Framework\TestCase;
+use Solution\Leetcode\{SolutionName};
+
+class {SolutionName}Test extends TestCase
+{
+    private {SolutionName} $solution;
+    protected function setUp(): void { $this->solution = new {SolutionName}(); }
+
+    public function testcase1()
+    {
+        $expected = true;
+        $actual = $this->solution->testExample();
+        $this->assertEquals($expected, $actual);
+    }
+}

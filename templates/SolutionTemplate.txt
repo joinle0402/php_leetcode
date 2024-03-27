@@ -1,0 +1,10 @@
+<?php
+namespace Solution\Leetcode;
+
+class {SolutionName}
+{
+    public function testExample(): bool
+    {
+        return true;
+    }
+}
